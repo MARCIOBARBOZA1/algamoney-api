@@ -14,10 +14,16 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 
+	public Pessoa salvar(Pessoa pessoa) {
+
+		return pessoaRepository.save(pessoa);
+	}
+
 	public Pessoa atualizar(String id, Pessoa pessoa) {
 		Pessoa pessoaSalva = buscarPessoaPeloCodigo(id);
 		
 		BeanUtils.copyProperties(pessoa, pessoaSalva, "id");
+		
 		return pessoaRepository.save(pessoaSalva);
 	}
 
