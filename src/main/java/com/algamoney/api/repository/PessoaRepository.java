@@ -13,7 +13,7 @@ import com.algamoney.api.repository.projection.ResumoPessoa;
 
 public interface PessoaRepository extends JpaRepository<Pessoa, String>, PessoaRepositoryQuery {
 
-	Pessoa findByid(String id);
+	//Pessoa findByid(String id);
 	Page<ResumoPessoa> resumir(PessoaFilter pessoaFilter, Pageable pageable);
 	Pessoa save(Optional<Pessoa> pessoaSalva);
 }

@@ -61,8 +61,8 @@ public class PessoaResource {
 	@CrossOrigin
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_CATEGORIA') and #oauth2.hasScope('read')")
-	public ResponseEntity<?> buscarPeloCodigo(@PathVariable String id) {
-		Optional<?> pessoa = this.pessoaRepository.findById(id);
+	public ResponseEntity<Pessoa> buscarPeloCodigo(@PathVariable String id) {
+		Optional<Pessoa> pessoa = this.pessoaRepository.findById(id);
 		return pessoa.isPresent() ?
 			   ResponseEntity.ok(pessoa.get()) : ResponseEntity.notFound().build();
 	

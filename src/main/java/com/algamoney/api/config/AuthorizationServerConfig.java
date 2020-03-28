@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
@@ -21,24 +21,26 @@ import com.algamoney.api.config.token.CustomTokenEnhancer;
 
 @Profile("oauth-security")
 @Configuration
-@EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
 				.withClient("angular")
-				.secret("$2a$10$JNGVqg4qpM1xVjkuoJ7HC.xzZ.QBtfXYWZ7wJgw46UHjAesbt2W7m") // Não encodada @ngul@r0 
+				.secret("$2a$10$yo7wr2da10TDVNkeWZvlBOubqDfu4aE1/2dIeFPZCCo2lNoTJpSlq") // @ngul@r0
 				.scopes("read", "write")
 				.authorizedGrantTypes("password", "refresh_token")
 				.accessTokenValiditySeconds(1800)
 				.refreshTokenValiditySeconds(3600 * 24)
 			.and()
 				.withClient("mobile")
-				.secret("$2a$10$4Ss0gZzF1p6y2oZWieJ31ejQK0X8kLvoROCTbFMJ4f6UiuWvjbMLq") // Não encodada m0b1l30
+				.secret("$2a$10$Fawxx1oTSSYmpsQIFlcPW.UCAuNO5bLsqnX5zeHO5Rw.klvXAo5ee") // m0b1l30
 				.scopes("read")
 				.authorizedGrantTypes("password", "refresh_token")
 				.accessTokenValiditySeconds(1800)
@@ -54,6 +56,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 			.tokenStore(tokenStore())
 			.tokenEnhancer(tokenEnhancerChain)
 			.reuseRefreshTokens(false)
+			.userDetailsService(userDetailsService)
 			.authenticationManager(authenticationManager);
 	}
 	

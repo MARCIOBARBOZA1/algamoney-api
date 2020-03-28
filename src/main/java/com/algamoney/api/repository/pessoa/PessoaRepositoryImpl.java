@@ -16,7 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
-import com.algamoney.api.model.Endereco_;
+//import com.algamoney.api.model.Endereco_;
 import com.algamoney.api.model.Pessoa;
 import com.algamoney.api.model.Pessoa_;
 import com.algamoney.api.repository.filter.PessoaFilter;

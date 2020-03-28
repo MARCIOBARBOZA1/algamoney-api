@@ -28,8 +28,8 @@ public class LancamentoService {
 	}
 
 	public Lancamento atualizar(String id, Lancamento lancamento) {
-		Lancamento lancamentoSalvo = buscarLancamentoExistente(id).orElse(null);
-		if (lancamentoSalvo != null && !lancamento.getPessoa().equals(lancamentoSalvo.getPessoa())) {
+		Lancamento lancamentoSalvo = buscarLancamentoExistente(id);
+		if (!lancamento.getPessoa().equals(lancamentoSalvo.getPessoa())) {
 			validarPessoa(lancamento);
 		}
 
@@ -40,7 +40,7 @@ public class LancamentoService {
 	private void validarPessoa(Lancamento lancamento) {
 		Pessoa pessoa = null;
 		if (lancamento.getPessoa().getId() != null) {
-			pessoa = pessoaRepository.findByid(lancamento.getPessoa().getId());
+			pessoa = pessoaRepository.getOne(lancamento.getPessoa().getId());
 		}
 
 		if (pessoa == null || pessoa.isInativo()) {
@@ -48,12 +48,12 @@ public class LancamentoService {
 		}
 	}
 
-	private Optional<Lancamento> buscarLancamentoExistente(String id) {
+	private Lancamento buscarLancamentoExistente(String id) {
 		Optional<Lancamento> lancamentoSalvo = lancamentoRepository.findById(id);
-		if (lancamentoSalvo == null) {
+		if (!lancamentoSalvo.isPresent()) {
 			throw new IllegalArgumentException();
 		}
-		return lancamentoSalvo;
+		return lancamentoSalvo.get();
 	}
 
 }
