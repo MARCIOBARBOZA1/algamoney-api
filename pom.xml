@@ -17,6 +17,12 @@
 		
 		<!-- Spring MVC -->
 		<spring-framework.version>5.2.4.RELEASE</spring-framework.version>
+		
+		<!-- JasperReports -->
+		<jasperreports.version>6.12.2</jasperreports.version>
+        <jasperreports-functions.version>6.12.2</jasperreports-functions.version>
+        <jasperreports-fonts.version>6.0.0</jasperreports-fonts.version>
+	
 	</properties>
 
 	<parent>
@@ -48,7 +54,12 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-web</artifactId>
 			</dependency>
-	
+
+			<dependency>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-starter-mail</artifactId>
+	        </dependency>	
+
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-devtools</artifactId>
@@ -114,6 +125,32 @@
 				<artifactId>spring-boot-configuration-processor</artifactId>
 				<optional>true</optional>
 			</dependency>
+			
+			<!-- JasperReports -->
+	        <dependency>
+	            <groupId>net.sf.jasperreports</groupId>
+	            <artifactId>jasperreports</artifactId>
+	            <version>${jasperreports.version}</version>
+	        </dependency>
+	                
+	        <dependency>
+	            <groupId>net.sf.jasperreports</groupId>
+	            <artifactId>jasperreports-functions</artifactId>
+	            <version>${jasperreports-functions.version}</version>
+	        </dependency>
+	        
+	        <dependency>
+	            <groupId>net.sf.jasperreports</groupId>
+	            <artifactId>jasperreports-fonts</artifactId>
+	            <version>${jasperreports-fonts.version}</version>
+	        </dependency>
+	        
+	        <dependency>
+	            <groupId>net.sf.jasperreports</groupId>
+	            <artifactId>jasperreports-fonts</artifactId>
+	            <version>${jasperreports-fonts.version}</version>
+	        </dependency>
+        
 		</dependencies>
 	
 
@@ -125,4 +162,13 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<repositories>
+        <repository>
+            <id>jr-ce-releases</id>
+            <url>http://jaspersoft.artifactoryonline.com/jaspersoft/jr-ce-releases</url>
+        </repository>
+    </repositories>
+	
+	
 </project>

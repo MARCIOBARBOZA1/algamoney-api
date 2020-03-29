@@ -8,7 +8,11 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Permissao.class)
 public abstract class Permissao_ {
 
-	public static volatile SingularAttribute<Permissao, Long> codigo;
+	public static volatile SingularAttribute<Permissao, String> id;
 	public static volatile SingularAttribute<Permissao, String> descricao;
 
+	public static final String ID = "id";
+	public static final String DESCRICAO = "descricao";
+
 }
+
