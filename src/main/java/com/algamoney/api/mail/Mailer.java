@@ -1,7 +1,10 @@
 package com.algamoney.api.mail;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -12,6 +15,11 @@ import org.springframework.context.event.EventListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+
+import com.algamoney.api.model.Lancamento;
+import com.algamoney.api.repository.LancamentoRepository;
 
 @Component
 public class Mailer {
@@ -19,6 +27,41 @@ public class Mailer {
 	@Autowired
 	private JavaMailSender mailSender;
 	
+	@Autowired
+	private TemplateEngine thymeleaf;
+	
+	@Autowired
+	private LancamentoRepository repo;
+	
+	@EventListener
+	private void teste(ApplicationReadyEvent event) {
+		String template = "mail/aviso-lancamentos-vencidos";
+		
+		List<Lancamento> lista = repo.findAll();
+		
+		Map<String, Object> variaveis = new HashMap<>();
+		variaveis.put("lancamentos", lista);
+		
+		this.enviarEmail("mfb.recife@gmail.com", 
+				Arrays.asList("marcio.barboza@zeroumclick.com.br"), 
+				"Testando", template, variaveis);
+		System.out.println("Terminado o envio de e-mail de tamplate...");
+	}
+	
+	public void enviarEmail(String remetente, 
+			List<String> destinatarios, String assunto, String template, 
+			Map<String, Object> variaveis) {
+		Context context = new Context(new Locale("pt", "BR"));
+		
+		variaveis.entrySet().forEach(
+				e -> context.setVariable(e.getKey(), e.getValue()));
+		
+		String mensagem = thymeleaf.process(template, context);
+		
+		this.enviarEmail(remetente, destinatarios, assunto, mensagem);
+	}
+	
+	/*
 	@EventListener
 	private void teste(ApplicationReadyEvent event) {
 		this.enviarEmail("marcio.francisco.recife@gmail.com", 
@@ -26,6 +69,7 @@ public class Mailer {
 				"Testando", "Olá!<br/>Teste ok.");
 		System.out.println("Terminado o envio de e-mail...");
 	}
+	*/
 	
 	public void enviarEmail(String remetente, 
 			List<String> destinatarios, String assunto, String mensagem) {

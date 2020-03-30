@@ -22,7 +22,6 @@
 		<jasperreports.version>6.12.2</jasperreports.version>
         <jasperreports-functions.version>6.12.2</jasperreports-functions.version>
         <jasperreports-fonts.version>6.0.0</jasperreports-fonts.version>
-	
 	</properties>
 
 	<parent>
@@ -81,7 +80,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-data-rest</artifactId>
 			</dependency>
-	
+
+			<dependency>
+			    <groupId>org.springframework.boot</groupId>
+			    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+			</dependency>
+			
+			<!-- mysql -->	
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
