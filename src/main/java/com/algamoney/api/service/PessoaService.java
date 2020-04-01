@@ -17,15 +17,18 @@ public class PessoaService {
 	private PessoaRepository pessoaRepository;
 
 	public Pessoa salvar(Pessoa pessoa) {
-
+		pessoa.getContatos().forEach(c -> c.setPessoa(pessoa));
 		return pessoaRepository.save(pessoa);
 	}
 
 	public Pessoa atualizar(String id, Pessoa pessoa) {
 		Pessoa pessoaSalva = buscarPessoaPeloCodigo(id);
 		
-		BeanUtils.copyProperties(pessoa, pessoaSalva, "id");
+		pessoaSalva.getContatos().clear();
+		pessoaSalva.getContatos().addAll(pessoa.getContatos());
+		pessoaSalva.getContatos().forEach(c -> c.setPessoa(pessoaSalva));
 		
+		BeanUtils.copyProperties(pessoa, pessoaSalva, "codigo", "contatos");
 		return pessoaRepository.save(pessoaSalva);
 	}
 

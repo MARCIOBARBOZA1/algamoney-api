@@ -67,12 +67,6 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Total]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="266" y="0" width="100" height="25" uuid="15ac9a84-e47d-4d29-9467-ae84672660bc">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e574a8c-92d1-418b-8767-f22f145e9c7f"/>
-				</reportElement>
-				<text><![CDATA[total]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -109,7 +103,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{pessoa}.name()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{pessoa}.getNome()]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤#,##0.00;¤-#,##0.00">
 				<reportElement x="482" y="0" width="67" height="23" uuid="0883b86b-4e23-47bc-8c1a-9910fd6eb409">
