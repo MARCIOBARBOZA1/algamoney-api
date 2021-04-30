@@ -16,7 +16,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
 		<!-- Spring MVC -->
-		<spring-framework.version>5.2.4.RELEASE</spring-framework.version>
+		<spring-framework.version>5.2.9.RELEASE</spring-framework.version>
 		
 		<!-- JasperReports -->
 		<jasperreports.version>6.12.2</jasperreports.version>
